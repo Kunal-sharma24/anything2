@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Sectio = () => {
   return (
-        <div className='w-full h-[280px] bg-[#DEE2E5] absolute inset-x-0 bottom-0 rounded-t-[40px]'>
+        <div className='w-full h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px]'>
             <div className='flex justify-between mx-[150px] my-10 ' >
               
               <div className='font-bold text-[30px] text-[#3CA9C0]'>Anything
