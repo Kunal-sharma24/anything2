@@ -1,3 +1,4 @@
+import Carosel from "./components/Carosel"
 import { Navbar } from "./components/Navbar"
 import { Sectio } from "./components/Sectio"
 
@@ -7,12 +8,7 @@ function App() {
     <div className=" h-full w-full flex flex-col min-h-screen">
       <Navbar className="flex-grow" />
       <div className='bg-[#F1F6F8] h-full w-full'>
-        <div className="h-[350px] w-full bg-slate-200 flex justify-center py-[150px] font-bold text-[36px]">carousel</div>
-
-
-
-
-
+        <Carosel />
 
       <div className='icons h-[80px] w-full py-8'>
         <div className='flex justify-around mx-20'>
