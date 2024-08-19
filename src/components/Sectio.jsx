@@ -2,6 +2,7 @@ import React from 'react'
 
 export const Sectio = () => {
   return (
+    <div className='flex-grow:1'>
         <div className='w-full h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px]'>
             <div className='flex justify-between mx-[150px] my-10 ' >
               
@@ -57,6 +58,7 @@ export const Sectio = () => {
 
 
         </div>   
+        </div>
   )
 }
 
