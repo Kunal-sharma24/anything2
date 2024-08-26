@@ -14,19 +14,19 @@ function Crousel() {
     },
     {
       id: 2,
-      title: "Samsung Galaxy Z Fold4",
-      description: "5G (Phantom Black, 12GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers.",
-      deliveryDate: "Free Delivery Sat, 6 July",
-      stockStatus: "Only one left in stock",
-      imageSrc: "./ecom/zflip.png",
+      title: "Apple iPhone 15 Pro Max",
+      description: "(256 GB) - Black Titanium FORGED IN TITANIUM — iPhone 15 Pro Max has a strong and light.",
+      deliveryDate: "Free Delivery Sun, 9 July",
+      stockStatus: "Only 4 left in stock",
+      imageSrc: "./ecom/i15.png",
     },
     {
       id: 3,
-      title: "Samsung Galaxy Z Fold4",
-      description: "5G (Phantom Black, 12GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers.",
+      title: "HP Laptop 15, 13th Gen Intel Core i3-1315U",
+      description: "15.6-inch (39.6 cm), FHD, 8GB DDR4, 512GB SSD, Intel Iris Xᵉ graphics.",
       deliveryDate: "Free Delivery Sat, 6 July",
-      stockStatus: "Only one left in stock",
-      imageSrc: "./ecom/zflip.png",
+      stockStatus: "Out of Stock",
+      imageSrc: "./ecom/hplaptop.png",
     },
   ];
 
@@ -48,7 +48,7 @@ function Crousel() {
           }`}
           style={{ transform: `translateX(${(index - activeIndex) * 100}%)` }}
         >
-          <div className='flex'>
+          <div className='flex relative'>
             <div className='h-[400px] w-[50%]'>
               <div className='h-[250px] opacity-[70%] font-bold text-[28px] py-8 px-12'>
                 {slide.title} <br />
@@ -65,7 +65,7 @@ function Crousel() {
                 </button>
               </div>
             </div>
-            <div className='h-[400px] w-[60%] py-8 hover:scale-125 transition-transform'>
+            <div className='h-[400px] w-[60%] py-8 hover:scale-110 transition-transform'>
               <img src={slide.imageSrc} alt={slide.title} />
             </div>
           </div>
@@ -74,13 +74,13 @@ function Crousel() {
       {/* ye button part ke liye haa yaha se edit kar dena */}
       <button
         onClick={handlePrevClick}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-blue-500 text-black rounded-full p-2 shadow-md hover:bg-gray-300 transition-all"
+        className="absolute inset-0 z-10 h-[48px] w-[48px] ml-[85px] text-[20px] font-extrabold left-4 top-1/2 transform -translate-y-1/2 bg-[#15ACC9] text-white rounded-full p-2 shadow-2xl hover:shadow-black hover:bg-white hover:text-gray-800 transition-all"
       >
         &#8592;
       </button>
       <button
         onClick={handleNextClick}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-black rounded-full p-2 shadow-md hover:bg-gray-300 transition-all"
+        className="absolute z-20 h-[48px] w-[48px] text-[20px] font-extrabold right-4 top-1/2 mr-[85px] transform -translate-y-1/2 bg-[#15ACC9] text-white rounded-full p-2 shadow-2xl hover:shadow-black hover:bg-white hover:text-gray-800 transition-all"
       >
         &#8594;
       </button>
