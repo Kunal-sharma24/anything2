@@ -5,11 +5,16 @@ export const Sectio = () => {
     <div className='flex-grow:1'>
         <div className='w-full h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px]'>
             <div className='flex justify-between mx-[150px] my-10 ' >
+              <div className='flex'>
+              <div className='h-[80px] w-[80px] py-2'>
+                <img src=".\ecom\ecom.png" alt="" />
+              </div>
               
               <div className='font-bold text-[30px] text-[#3CA9C0]'>Anything
                 <b>
                   <div className='font-normal text-[15px] text-black mb-2'>www.anything.com</div>
                 </b>
+              </div>
               </div>
               <div className='font-medium text-[20px] my-3'>About Us
                 

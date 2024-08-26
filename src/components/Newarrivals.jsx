@@ -9,7 +9,7 @@ function Newarrivals() {
         <div className='font-semibold text-[32px] px-8 flex justify-start w-[90%]'>New Arrivals</div>
         <div className='font-semibold text-[16px] mr-2 my-4 hover:underline text-blue-500 flex justify-end '>View All</div>
       </div>
-      <div className='flex justify-between mx-[30px] my-8 mx-[80px] '>
+      <div className='flex justify-between my-8 mx-[80px] '>
         <div>
            <div className='bg-[#DEE2E4] h-[300px] w-[250px] rounded-2xl flex justify-center hover:shadow-xl hover:scale-110 transition-transform'>
              <div className='h[80%] w-[80%] my-4'><img src=".\ecom\i15.png" alt="iphone" /></div>
