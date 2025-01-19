@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import React from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -20,9 +23,12 @@ const App = () => {
     setIsDarkMode(!isDarkMode);
   };
   const [showLogin, setShowLogin] = useState(true);
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); 
+  }, []);
 
   return (
-    <div>
+    <div data-aos="fade-down" className="bg-gradient-to-r py- from-slate-200 to-slate-100 dark:bg-gradient-to-tr dark:from-slate-900 dark:to-slate-500">
     <div className="min-h-screen bg-gradient-to-r py-6 from-slate-200 to-slate-100 dark:bg-gradient-to-tr dark:from-slate-900 dark:to-slate-500 text-gray-900 dark:text-gray-100 transition-colors duration-500">
       
       <div className='h-[450px] mt-[-35px] flex justify-center rounded-2xl drop-shadow-2xl transform transition-all duration-500'>

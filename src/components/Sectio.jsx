@@ -66,5 +66,6 @@ export const Sectio = () => {
         </div>
   )
 }
+export default Sectio
 
 
