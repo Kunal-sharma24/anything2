@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,10 +18,28 @@ const App = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Duration of the animations in milliseconds
   }, []);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+      // Retrieve saved theme from localStorage
+      return localStorage.getItem("theme") === "dark";
+    });
+  
+    useEffect(() => {
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    }, [isDarkMode]);
+  
+    const toggleDarkMode = () => {
+      setIsDarkMode(!isDarkMode);
+    };
 
   return (
     <BrowserRouter>
-      <div className="bg-[#F1F6F8] h-full w-full flex flex-col min-h-screen">
+      <div className="bg-[#F1F6F8] dark:bg-gradient-to-tr dark:from-slate-900 dark:to-slate-500 h-full w-full flex flex-col min-h-screen">
         <Routes>
           <Route
             path="/"

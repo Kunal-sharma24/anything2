@@ -5,7 +5,7 @@ function Catogeries() {
     <div>
       
       <div className='categories h-[400px] w-full my-5'>
-        <div className='flex justify-center text-[32px] font-semibold py-5'>Popular Categories</div>
+        <div className='flex justify-center text-[32px] font-semibold py-5' dark:text-white>Popular Categories</div>
         <div className='flex justify-around h-[200px] my-5 mx-20'>
           <div>
              <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>

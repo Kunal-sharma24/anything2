@@ -2,6 +2,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import React from "react";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { div } from "framer-motion/client";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -26,14 +28,23 @@ const App = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 }); 
   }, []);
+ 
 
   return (
     <div data-aos="fade-down" className="bg-gradient-to-r py- from-slate-200 to-slate-100 dark:bg-gradient-to-tr dark:from-slate-900 dark:to-slate-500">
     <div className="min-h-screen bg-gradient-to-r py-6 from-slate-200 to-slate-100 dark:bg-gradient-to-tr dark:from-slate-900 dark:to-slate-500 text-gray-900 dark:text-gray-100 transition-colors duration-500">
-      
+    
+        <AnimatePresence mode="wait">   
       <div className='h-[450px] mt-[-35px] flex justify-center rounded-2xl drop-shadow-2xl transform transition-all duration-500'>
       {showLogin ? (
         // Login Card
+        <motion.div
+              key="cardA"
+              initial={{ opacity: 0, rotateY: -90, scale: 0.5 }}
+              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+              exit={{ opacity: 0, rotateY: 90, scale: 0.5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
         <div className="relative dark:bg-gray-300 bg-white h-[450px] mx-52 my-16 flex justify-center rounded-2xl drop-shadow-2xl">
           <div className="h-full w-[50%] bg-blue-400 rounded-l-2xl rounded-r-[150px]">
           <div className="h-[50px] w-[50px]">
@@ -102,10 +113,17 @@ const App = () => {
             </div>
           </div>
         </div>
-        
+        </motion.div>
         
       ) : (
         // Signup Card
+        <motion.div
+        key="cardB"
+        initial={{ opacity: 0, rotateY: -90, scale: 0.5 }}
+        animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+        exit={{ opacity: 0, rotateY: 90, scale: 0.5 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
         <div className="bg-white dark:bg-gray-300 h-[450px] mx-52 my-16 flex justify-center rounded-2xl drop-shadow-2xl">
           <div className="h-full w-[50%] dark:bg-gray-300 bg-white rounded-l-2xl">
           <div className="h-[50px] w-[50px]">
@@ -178,11 +196,15 @@ const App = () => {
             </div>
           </div>
           </div>
+          </motion.div>
         
       )}
+     
+    </div>
+    </AnimatePresence>
     </div>
     </div>
-    </div>
+
    
   );
 };

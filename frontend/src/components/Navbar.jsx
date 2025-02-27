@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
+  
   return (
     <div className='w-full  h-[180px] flex justify-between'>
         <div className='cols-span-1 px-9 py-9 flex items-center' >
