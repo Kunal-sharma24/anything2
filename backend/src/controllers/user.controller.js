@@ -13,42 +13,44 @@ const registerUser = asyncHandler( async (req, res) => {
    //check if user is created
    //return response
    const { username, email, fullName, password } = req.body 
-   //console.log("email:", email)
-   if(!email || !username || !fullName || !password){
-       
+  
+    if(
+     [ username, email, fullName, password].some((field) => field?.trim() === "" )
+  ) {
        throw new ApiError(400, "All fields are required")
-   }
-   const userExisted = User.findOne({
+  }
+   const userExisted = await User.findOne({
          $or: [
               {email: email},
               {username: username}
          ]
     })
+
     if(userExisted){
         throw new ApiError(409, "User already exists")
     }
+
     const user = await User.create({
-        username: username.toLowerCase(),
+        username,
         email,
         fullName,
         password
     })
-    const userCreated = await user.findbyId(user._id).select("-password -refreshToken")
+
+    const userCreated = await User.findById(user._id).select(
+        "-password -refreshToken"
+    )
+   
     if(!userCreated){
         throw new ApiError(500, "Something went wrong!!!, User not created")
     }
+
     return res.status(201).json(
         new ApiResponse(201, userCreated, "User created successfully"))
 
-
-
-
    })
 
-
-
-
-
+   
 
 
 export {
