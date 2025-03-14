@@ -12,7 +12,7 @@ import Extrasales from "./components/Extrasales";
 import Featuredbrands from "./components/Featuredbrands";
 import Sectio from './components/Sectio';
 import Loginsignup from "./components/Loginsigup";
-import { div } from "framer-motion/client";
+
 
 const App = () => {
   useEffect(() => {
