@@ -1,54 +1,46 @@
-import React from 'react'
+import React from "react";
 
-function Catogeries() {
+const categories = [
+  { name: "Clothes", img: "/ecom/mens.png", alt: "clothes" },
+  { name: "Smartphones", img: "/ecom/iphone11.png", alt: "smartphone" },
+  { name: "Footwear", img: "/ecom/R.png", alt: "shoes" },
+  { name: "Laptops", img: "/ecom/hplaptop.png", alt: "laptop" },
+  { name: "Headphones", img: "/ecom/headphone.png", alt: "headphone" },
+  { name: "Smart Watches", img: "/ecom/iwatch.png", alt: "smartwatch" },
+];
+
+const Categories = () => {
   return (
-    <div>
-      
-      <div className='categories h-[400px] w-full my-5'>
-        <div className='flex justify-center text-[32px] font-semibold py-5' dark:text-white>Popular Categories</div>
-        <div className='flex justify-around h-[200px] my-5 mx-20'>
-          <div>
-             <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-              <div className='mx-3 py-5'><img src=".\ecom\mens.png" alt="clothes" /></div>
-             </div>
-             <div className='flex justify-center text-[18px] my-2 hover:text-[#15ACC9]'>Clothes</div>
-          </div>
+    <div className="w-full">
+      {/* Title */}
+      <h2 className="font-semibold text-[32px] mb-4 ml-6 md:ml-16">Popular Categories </h2>
 
-          <div>
-          <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className='mx-3 py-8'><img src=".\ecom\iphone11.png" alt="smartphone" /></div>
-          </div>
-          <div className='flex justify-center text-[18px] my-2 hover:text-[#15ACC9]'>Smartphones</div>
-          </div>
-          <div>
-          <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className='py-7 mx-2'><img src=".\ecom\R.png" alt="shoes" /></div>
-          </div>
-          <div className='flex justify-center  text-[18px] my-2 hover:text-[#15ACC9]'>Footwear</div>
-          </div>
-          <div>
-          <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className='py-14'><img src=".\ecom\hplaptop.png" alt="" /></div>
-          </div>
-          <div className='flex justify-center text-[18px] my-2 hover:text-[#15ACC9]'>Laptops</div>
-          </div>
-          <div>
-          <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className='mx-4 py-9'><img src=".\ecom\headphone.png" alt="" /></div>
-          </div>
-          <div className='flex justify-center text-[18px] my-2 hover:text-[#15ACC9]'>Headphones</div>
-          </div>
-          <div>
-          <div className='bg-[#DEE2E4] h-[200px] w-[150px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className='mx-5 py-9'><img src=".\ecom\iwatch.png" alt="" /></div>
-          </div>
-          <div className='flex justify-center text-[18px] my-2 hover:text-[#15ACC9]'>Smart Watches</div>
+      {/* Scrollable on Mobile, No Scroll on Desktop */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="overflow-x-auto md:overflow-hidden scrollbar-hide">
+          <div className="flex md:grid md:grid-cols-6 md:ml-12 md:mr-12 gap-4 md:gap-0">
+            {categories.map((category, index) => (
+              <div key={index} className="flex flex-col items-center min-w-[110px] md:min-w-[140px]">
+                {/* Category Box */}
+                <div className="bg-gray-200 h-[150px] w-[110px] md:h-[180px] md:w-[140px] rounded-2xl 
+                    flex items-center justify-center hover:shadow-xl hover:scale-105 transition-transform">
+                  <img
+                    src={category.img}
+                    alt={category.alt}
+                    className="h-28 md:h-32 object-contain"
+                  />
+                </div>
+                {/* Category Name */}
+                <p className="text-gray-700 text-sm md:text-lg font-semibold mt-2 hover:text-blue-500 cursor-pointer">
+                  {category.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Catogeries
+export default Categories;

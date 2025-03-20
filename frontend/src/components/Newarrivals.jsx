@@ -1,47 +1,37 @@
-import React from 'react'
+import React from "react";
 
 function Newarrivals() {
   return (
-    <div>
-      
-      <div className='newarrival h-[510px] w-full '>
-      <div className='flex justify-center'>
-        <div className='font-semibold text-[32px] px-8 flex justify-start w-[90%]'>New Arrivals</div>
-        <div className='font-semibold text-[16px] mr-2 my-4 hover:underline text-blue-500 flex justify-end '>View All</div>
+    <div className="w-full py-12">
+      {/* Title Section */}
+      <div className="flex justify-between items-center px-8">
+        <h2 className="text-[32px] font-semibold md:ml-10 mb-[-20px]">New Arrivals</h2>
+        <a href="#" className="text-blue-500 text-[16px] mb-[-20px] hover:underline">
+          View All
+        </a>
       </div>
-      <div className='flex justify-between my-8 mx-[80px] '>
-        <div>
-           <div className='bg-[#DEE2E4] h-[300px] w-[250px] rounded-2xl flex justify-center hover:shadow-xl hover:scale-110 transition-transform'>
-             <div className='h[80%] w-[80%] my-4'><img src=".\ecom\i15.png" alt="iphone" /></div>
-        </div>
-         <div className='flex justify-center my-5 text-[20px] font-medium opacity-[70%]'>Iphone 15 Pro Max</div>
-         <div className='flex justify-center'>(3.5k Reviews)</div>
-        </div>
-        <div>
-         <div className='bg-[#DEE2E4] h-[300px] w-[250px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-           <div className='rotate-[30deg] flex jusitfy-center py-6'><img src=".\ecom\shoesair.png" alt="shoes" /></div>
-        </div>
-           <div className='flex justify-center my-5 text-[20px] font-medium opacity-[70%]'>Air VapourMax</div>
-           <div className='flex justify-center'>(2.3k Reviews)</div>
-        </div>
-        <div>
-            <div className='bg-[#DEE2E4] h-[300px] w-[250px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-              <div className='mx-4 flex jusitfy-center py-12'><img src=".\ecom\trouser.png" alt="shoes" /></div>
-        </div>
-            <div className='flex justify-center my-5 text-[20px] font-medium opacity-[70%]'>Korean Trousers</div>
-            <div className='flex justify-center'>(3.5k Reviews)</div>
-        </div>
-        <div>
-         <div className='bg-[#DEE2E4] h-[300px] w-[250px] rounded-2xl hover:shadow-xl hover:scale-110 transition-transform'>
-            <div className=' flex jusitfy-center mx-5 py-10'><img src=".\ecom\marshall.png" alt="shoes" /></div>
-        </div>
-          <div className='flex justify-center my-5 text-[20px] font-medium opacity-[70%]'>Marshall 3.76</div>
-          <div className='flex justify-center'>(4.5k Reviews)</div>
-        </div>
-         </div>
+
+      {/* Product Grid */}
+      <div className="flex justify-between items-center md:ml-20 md:mr-20 px-2 mt-8 gap-1 md:gap-0">
+        {[
+          { img: "./ecom/i15.png", name: "iPhone 15 Pro Max", reviews: "3.5k Reviews" },
+          { img: "./ecom/shoesair.png", name: "Air VapourMax", reviews: "2.3k Reviews" },
+          { img: "./ecom/trouser.png", name: "Korean Trousers", reviews: "3.5k Reviews" },
+          { img: "./ecom/marshall.png", name: "Marshall 3.76", reviews: "4.5k Reviews" }
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="bg-[#DEE2E4] rounded-2xl p-3 flex flex-col items-center hover:shadow-xl hover:scale-105 transition-transform 
+            h-[180px] w-[120px] md:h-[300px] md:w-[250px]"
+          >
+            <img src={item.img} alt={item.name} className="h-[60%] w-auto object-contain" />
+            <div className="text-[12px] md:text-[20px] font-medium opacity-70 mt-2 text-center">{item.name}</div>
+            <div className="text-xs md:text-sm opacity-60">{item.reviews}</div>
+          </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Newarrivals
+export default Newarrivals;

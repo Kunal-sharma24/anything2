@@ -1,97 +1,194 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
-  
+const Navbar = () => {
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [token, setToken] = useState(null);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("http://localhost:8002/api/v1/users/me", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          setToken(true);
+        } else {
+          setToken(false);
+        }
+      } catch (error) {
+        setToken(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:8002/api/v1/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      setToken(false);
+      navigate("/login");
+      window.location.reload();
+    } catch (error) {
+      alert("Logout failed!");
+    }
+  };
+
   return (
-    <div className='w-full  h-[180px] flex justify-between'>
-        <div className='cols-span-1 px-9 py-9 flex items-center' >
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 48 48">
-  <path fill="url(#a)" d="M36.78 19.414c-.112.766-.617 1.806-1.196 2.71a5.048 5.048 0 0 1-3.218 2.218l-5.846 1.223a4.498 4.498 0 0 0-2.432 1.403l-3.833 4.285c-.72.806-1.224.613-1.224-.467-.009.04-1.903 4.925 3.116 7.82 1.929 1.112 4.705.712 6.633-.4l10.218-5.894a15.464 15.464 0 0 0 7.416-10.249c.035-.17.063-.342.092-.513l-9.727-2.136Z"/>
-  <path fill="url(#b)" d="M34.13 13.527c1.928 1.112 2.716 2.768 2.716 4.993 0 .302-.024.6-.067.894l4.117 1.769 5.61.367c.719-4.158-.69-8.437-3.213-11.838a23.92 23.92 0 0 0-7.28-6.476 24.156 24.156 0 0 0-7.359-2.78l-2.8 3.625-.884 4.163 9.16 5.283Z"/>
-  <path fill="url(#c)" d="M1.175 16.578c0 .003.002.004.003 0 .216-.647.487-1.37.825-2.143 1.767-4.034 5.171-6.724 9.36-8.096A15.511 15.511 0 0 1 23.94 7.65l1.03.595 3.684-7.79C16.936-1.885 4.96 5 1.19 16.533l-.015.045Z"/>
-  <path fill="url(#d)" d="M28.38 38.206a6.237 6.237 0 0 1-6.975-.505l-3.392 2.332-2.923 4.724c3.245 2.7 7.458 3.568 11.668 3.085a23.943 23.943 0 0 0 9.254-3.062 24.135 24.135 0 0 0 6.09-4.976L40.36 35.57l-2.82-2.647-9.16 5.284Z"/>
-  <path fill="url(#e)" d="M21.405 37.701a6.224 6.224 0 0 1-2.374-4.888V16.61c0-.906.266-1.06 1.051-.607-1.209-.697-4.002-3.091-7.45-1.102-1.929 1.112-3.517 3.567-3.517 5.792V32.48c0 4.409 2.284 9.007 5.577 11.94.13.117.265.226.398.338l6.315-7.056Z"/>
-  <path fill="url(#f)" d="M41.866 7.969c-.003-.003-.005 0-.003.002.454.51.945 1.106 1.446 1.785a15.453 15.453 0 0 1 2.685 12.346 15.485 15.485 0 0 1-7.425 10.227l-1.03.593 4.563 6.882c7.888-8.968 7.908-22.77-.205-31.8l-.031-.035Z"/>
-  <path fill="url(#g)" d="M9.515 20.692a6.226 6.226 0 0 1 3.925-5.782l-.325-4.1-2.287-4.692a15.468 15.468 0 0 0-8.855 8.353A23.887 23.887 0 0 0 0 24.008c0 2.754.454 5.353 1.268 7.758l4.543.609 3.704-1.117V20.692Z"/>
-  <path fill="url(#h)" d="M13.44 14.91a6.237 6.237 0 0 1 5.425.39l.166.095 13.343 7.697c.936.54.85 1.07-.207 1.292l.77-.161a5.045 5.045 0 0 0 2.645-1.484 6.134 6.134 0 0 0 1.664-4.22 6.226 6.226 0 0 0-3.117-5.392L23.912 7.234a15.491 15.491 0 0 0-12.593-1.292c-.166.054-.328.116-.491.176l2.612 8.792Z"/>
-  <path fill="url(#i)" d="M28.983 47.479c.004-.001.003-.004 0-.003-.67.137-1.432.264-2.27.357A15.477 15.477 0 0 1 9.515 32.446v-1.188l-8.248.507c3.83 11.309 15.785 18.228 27.669 15.723.005 0 .025-.005.046-.01Z"/>
-  <defs>
-    <linearGradient id="a" x1="30.09" x2="34.811" y1="35.655" y2="19.21" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1724C9"/>
-      <stop offset="1" stop-color="#1C64F2"/>
-    </linearGradient>
-    <linearGradient id="b" x1="40.964" x2="28.545" y1="15.601" y2="3.225" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1C64F2"/>
-      <stop offset="1" stop-color="#0092FF"/>
-    </linearGradient>
-    <linearGradient id="c" x1="24.247" x2="5.511" y1="7.532" y2="8.716" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0092FF"/>
-      <stop offset="1" stop-color="#45B2FF"/>
-    </linearGradient>
-    <linearGradient id="d" x1="22.98" x2="39.805" y1="42.994" y2="38.454" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1C64F2"/>
-      <stop offset="1" stop-color="#0092FF"/>
-    </linearGradient>
-    <linearGradient id="e" x1="10.903" x2="22.849" y1="23.524" y2="35.902" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1724C9"/>
-      <stop offset="1" stop-color="#1C64F2"/>
-    </linearGradient>
-    <linearGradient id="f" x1="38.176" x2="46.51" y1="32.453" y2="15.652" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0092FF"/>
-      <stop offset="1" stop-color="#45B2FF"/>
-    </linearGradient>
-    <linearGradient id="g" x1="8.046" x2="3.586" y1="13.696" y2="30.46" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1C64F2"/>
-      <stop offset="1" stop-color="#0092FF"/>
-    </linearGradient>
-    <linearGradient id="h" x1="30.815" x2="14.517" y1="12.899" y2="16.957" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1724C9"/>
-      <stop offset="1" stop-color="#1C64F2"/>
-    </linearGradient>
-    <linearGradient id="i" x1="9.61" x2="19.999" y1="32.035" y2="47.662" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0092FF"/>
-      <stop offset="1" stop-color="#45B2FF"/>
-    </linearGradient>
-  </defs>
-        </svg>
-        <h1 className='text-3xl font-bold px-3 py-1 text-[#00b4d8]'>AnyThing</h1>
-        </div>
-
-        <div className="mx-2 container flex items-center w-[80%] rounded-3xl">
-        <div className='bg-[#ADE8f4] h-14 px-6 flex  rounded-l-3xl items-center'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg></div>
-        <input
-        type="text"
-        className="bg-[#ADE8f4] h-14 w-full pr-8 pl-5 z-0 focus:shadow focus:outline-none"
-        placeholder="Search anything..."
-        />
-        <select className="bg-[#ADE8f4] h-14 px-3  z-0 focus:shadow focus:outline-none">
-        <option>All Categories</option>
-        <option>Category 1</option>
-        <option>Category 2</option>
-        <option>Category 3</option>
-        </select>
-        <button className="bg-[#48CAE4] text-white rounded-r-3xl h-14 px-6 z-0 focus:shadow focus:outline-none">
-        Search
-        </button>
+    <nav className="w-full bg-white dark:bg-gray-900 dark:text-white shadow-md transition-colors duration-300 mb-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-10 flex justify-between items-center h-20">
         
+        {/* Left - Logo */}
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#00b4d8] dark:text-[#48CAE4]">
+          AnyThing
+        </h1>
+
+        {/* Center - Search Bar */}
+        <div className="hidden sm:flex items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
+          <input
+            type="text"
+            className="bg-transparent outline-none w-36 sm:w-64 px-2 text-black dark:text-white"
+            placeholder="Search..."
+          />
+          <button className="text-[#00b4d8] dark:text-[#48CAE4]">
+            🔍
+          </button>
         </div>
 
+        {/* Right - Your Cart, Theme Toggle, Login/Register */}
+        <div className="hidden sm:flex items-center space-x-6">
+          
+          {/* Your Cart */}
+          <Link to="/cart" className="flex items-center space-x-2 text-[#464646] dark:text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 3h2l.4 2m0 0l1.6 8h9.6l1.6-8m-12 0h12m-4 10a2 2 0 100 4 2 2 0 000-4zm-6 0a2 2 0 100 4 2 2 0 000-4z"
+              />
+            </svg>
+            <span>Your Cart</span>
+          </Link>
 
+          {/* Theme Toggle */}
+          <button onClick={() => setDarkMode(!darkMode)} className="text-xl focus:outline-none">
+            {darkMode ? "☀️" : "🌙"}
+          </button>
 
-
-        <div className='flex justify-end items-center py-11 px-5 text-[#464646]'>
-            <Link to="/loginpage">Login|Register</Link>
-        <div className='flex items-center'>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-        </svg>
-        <div className='flex justify-between items-center'>YourCart</div>
+          {/* Login/Register OR Logout */}
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-[#00b4d8] text-white px-4 py-2 rounded-lg hover:bg-[#0096c7]"
+            >
+              Login | Register
+            </Link>
+          )}
         </div>
-        </div>
 
-    </div>
-  )
-}
+        {/* Mobile Menu Button */}
+        <button
+          className="sm:hidden text-[#00b4d8] dark:text-white text-2xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="sm:hidden flex flex-col items-center space-y-3 py-3 border-t dark:border-gray-700">
+          {/* Search Bar */}
+          <div className="flex items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
+            <input
+              type="text"
+              className="bg-transparent outline-none w-40 px-2 text-black dark:text-white"
+              placeholder="Search..."
+            />
+            <button className="text-[#00b4d8] dark:text-[#48CAE4]">
+              🔍
+            </button>
+          </div>
+
+          {/* Your Cart */}
+          <Link to="/cart" className="flex items-center space-x-2 text-[#464646] dark:text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 3h2l.4 2m0 0l1.6 8h9.6l1.6-8m-12 0h12m-4 10a2 2 0 100 4 2 2 0 000-4zm-6 0a2 2 0 100 4 2 2 0 000-4z"
+              />
+            </svg>
+            <span>Your Cart</span>
+          </Link>
+
+          {/* Theme Toggle */}
+          <button onClick={() => setDarkMode(!darkMode)} className="text-xl focus:outline-none">
+            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+          </button>
+
+          {/* Login/Register OR Logout */}
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-[#00b4d8] text-white px-4 py-2 rounded-lg hover:bg-[#0096c7]"
+            >
+              Login | Register
+            </Link>
+          )}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

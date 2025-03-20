@@ -1,71 +1,67 @@
-import React from 'react'
+import React from 'react';
 
 export const Sectio = () => {
   return (
-    <div className='flex-grow:1'>
-        <div className='w-full h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px]'>
-            <div className='flex justify-between mx-[150px] my-10 ' >
-              <div className='flex'>
-              <div className='h-[80px] w-[80px] py-2'>
-                <img src=".\ecom\ecom.png" alt="" />
-              </div>
-              
-              <div className='font-bold text-[30px] text-[#3CA9C0]'>Anything
-                <b>
-                  <div className='font-normal text-[15px] text-black mb-2'>www.anything.com</div>
-                </b>
-              </div>
-              </div>
-              <div className='font-medium text-[20px] my-3'>About Us
-                
-                  <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">Contact Us</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black hover:underline hover:text-[#3CA9C0]'><a href="http://www.gmail.com">Mail Us</a></div>
-                  </b>
-              </div>
-              <div className='font-medium text-[20px] my-3'>Products
-                
-              <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">Clothes</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black hover:underline hover:text-[#3CA9C0]'><a href="http://www.gmail.com">Smartphones</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">Laptops</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black hover:underline hover:text-[#3CA9C0]'><a href="http://www.gmail.com">Headphones</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">Smart Watches</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black hover:underline hover:text-[#3CA9C0]'><a href="http://www.gmail.com">Shoes</a></div>
-                  </b>
-              </div>
-              <div className='font-medium text-[20px] my-3'>Help
-              <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">FAQ</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black hover:underline hover:text-[#3CA9C0]'><a href="http://www.gmail.com">Shipping</a></div>
-                  </b>
-                  <b>
-                    <div className='font-normal text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]'><a href="http://www.anything.com">Customer Care</a></div>
-                  </b>
-              </div>
-              
+    <div className="flex-grow w-full bg-[#F1F6F8]">
+      <div className="w-full h-auto md:h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px] px-4 md:px-[150px] py-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-6 md:gap-0">
+          
+          {/* Logo Section */}
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-3">
+            <div className="h-[60px] w-[60px] md:h-[80px] md:w-[80px]">
+              <img src="./ecom/ecom.png" alt="Logo" className="h-full w-full object-contain" />
             </div>
-           
+            <div className="text-[#3CA9C0] font-bold text-[24px] md:text-[30px] text-center md:text-left">
+              Anything
+              <div className="font-normal text-[14px] md:text-[15px] text-black">
+                <b>www.anything.com</b>
+              </div>
+            </div>
+          </div>
+          <div className='grid md:grid md:mr-6 md:gap-32 gap-16 grid-cols-3'>
+          {/* About Us */}
+          <div className="text-center md:text-left">
+            <div className="font-medium text-[18px] md:text-[20px]">About Us</div>
+            <b>
+              <div className="font-normal text-[14px] md:text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]">
+                <a href="http://www.anything.com">Contact Us</a>
+              </div>
+            </b>
+            <b>
+              <div className="font-normal text-[14px] md:text-[15px] text-black hover:underline hover:text-[#3CA9C0]">
+                <a href="http://www.gmail.com">Mail Us</a>
+              </div>
+            </b>
+          </div>
 
+          {/* Products */}
+          <div className="text-center md:text-left">
+            <div className="font-medium text-[18px] md:text-[20px]">Products</div>
+            {['Clothes', 'Smartphones', 'Laptops', 'Headphones', 'Smart Watches', 'Shoes'].map((product, index) => (
+              <b key={index}>
+                <div className="font-normal text-[14px] md:text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]">
+                  <a href="http://www.anything.com">{product}</a>
+                </div>
+              </b>
+            ))}
+          </div>
 
-        </div>   
+          {/* Help */}
+          <div className="text-center md:text-left">
+            <div className="font-medium text-[18px] md:text-[20px]">Help</div>
+            {['FAQ', 'Shipping', 'Customer Care'].map((help, index) => (
+              <b key={index}>
+                <div className="font-normal text-[14px] md:text-[15px] text-black my-1 hover:underline hover:text-[#3CA9C0]">
+                  <a href="http://www.anything.com">{help}</a>
+                </div>
+              </b>
+            ))}
+          </div>
+          </div>
         </div>
-  )
-}
-export default Sectio
+      </div>
+    </div>
+  );
+};
 
-
+export default Sectio;
