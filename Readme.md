@@ -36,5 +36,5 @@ This is a **MERN stack** e-commerce website where users can browse products, add
 
 ### **🔹 Clone the Repository**
 ```sh
-git clone https://github.com/your-username/ecom-website.git
+git clone https://github.com/farhanadil1/anything2.git
 cd ecom-website
