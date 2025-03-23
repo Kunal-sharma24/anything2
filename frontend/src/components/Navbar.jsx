@@ -65,16 +65,21 @@ const Navbar = () => {
         </h1>
 
         {/* Center - Search Bar */}
-        <div className="hidden sm:flex items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
-          <input
-            type="text"
-            className="bg-transparent outline-none w-36 sm:w-64 px-2 text-black dark:text-white"
-            placeholder="Search..."
-          />
-          <button className="text-[#00b4d8] dark:text-[#48CAE4]">
-            🔍
-          </button>
-        </div>
+        <div className="hidden sm:flex md:w-[600px] items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
+  {/* Search Input */}
+  <input
+    type="text"
+    className="bg-transparent outline-none w-full px-2 text-black dark:text-white"
+    placeholder="Search..."
+  />
+  
+  {/* Search Icon (Right-most side in md:) */}
+  <button className="text-[#00b4d8] dark:text-[#48CAE4] md:ml-2">
+    🔍
+  </button>
+</div>
+
+
 
         {/* Right - Your Cart, Theme Toggle, Login/Register */}
         <div className="hidden sm:flex items-center space-x-6">

@@ -22,7 +22,7 @@ function Newarrivals() {
           <div
             key={index}
             className="bg-[#DEE2E4] rounded-2xl p-3 flex flex-col items-center hover:shadow-xl hover:scale-105 transition-transform 
-            h-[180px] w-[120px] md:h-[300px] md:w-[250px]"
+            h-[200px] w-[120px] md:h-[300px] md:w-[250px]"
           >
             <img src={item.img} alt={item.name} className="h-[60%] w-auto object-contain" />
             <div className="text-[12px] md:text-[20px] font-medium opacity-70 mt-2 text-center">{item.name}</div>

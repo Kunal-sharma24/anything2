@@ -39,7 +39,7 @@ function Crousel() {
   };
 
   return (
-    <div className="h-[280px] md:h-[400px] w-full flex justify-center overflow-hidden relative">
+    <div className="h-[300px] md:h-[400px] w-full flex justify-center overflow-hidden relative">
     {slides.map((slide, index) => (
       <div
         key={slide.id}

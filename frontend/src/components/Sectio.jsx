@@ -2,6 +2,7 @@ import React from 'react';
 
 export const Sectio = () => {
   return (
+    
     <div className="flex-grow w-full bg-[#F1F6F8]">
       <div className="w-full h-auto md:h-[280px] bg-[#DEE2E5] absolute rounded-t-[40px] px-4 md:px-[150px] py-8">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-6 md:gap-0">
