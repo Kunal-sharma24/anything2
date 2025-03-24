@@ -7,7 +7,7 @@ This is a **MERN stack** e-commerce website where users can browse products, add
 ### ✅ **User Features**
 - 🔹 User authentication (JWT)
 - 🔹 Browse & search products
-- 🔹 Add to cart & wishlist
+- 🔹 Add to cart
 - 🔹 Checkout with address selection
 - 🔹 Payment integration (Stripe/Razorpay)
 - 🔹 Order tracking & history
@@ -34,7 +34,7 @@ This is a **MERN stack** e-commerce website where users can browse products, add
 
 ## 📦 Installation
 
-### **🔹 Clone the Repository**
+### **🔹Clone the Repository**
 ```sh
 git clone https://github.com/farhanadil1/anything2.git
 cd ecom-website
