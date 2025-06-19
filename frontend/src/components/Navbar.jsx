@@ -1,197 +1,88 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { FiSearch, FiShoppingCart, FiSun, FiMoon, FiUser } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [token, setToken] = useState(null);
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+  const [darkMode, setDarkMode] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();  // Initialize navigate
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch("http://localhost:8002/api/v1/users/me", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          setToken(true);
-        } else {
-          setToken(false);
-        }
-      } catch (error) {
-        setToken(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
+    // Handle dark mode
+    document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
-  const handleLogout = async () => {
-    try {
-      await fetch("http://localhost:8002/api/v1/users/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      setToken(false);
-      navigate("/login");
-      window.location.reload();
-    } catch (error) {
-      alert("Logout failed!");
+  useEffect(() => {
+    // Check login status
+    const token = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username'); // optional
+    if (token) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername || 'User');
     }
-  };
+  }, []);
 
   return (
-    <nav className="w-full bg-white dark:bg-gray-900 dark:text-white shadow-md transition-colors duration-300 mb-6">
-      <div className="max-w-7xl mx-auto px-5 sm:px-10 flex justify-between items-center h-20">
-        
-        {/* Left - Logo */}
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#00b4d8] dark:text-[#48CAE4]">
-          AnyThing
-        </h1>
-
-        {/* Center - Search Bar */}
-        <div className="hidden sm:flex md:w-[600px] items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
-  {/* Search Input */}
-  <input
-    type="text"
-    className="bg-transparent outline-none w-full px-2 text-black dark:text-white"
-    placeholder="Search..."
-  />
-  
-  {/* Search Icon (Right-most side in md:) */}
-  <button className="text-[#00b4d8] dark:text-[#48CAE4] md:ml-2">
-    🔍
-  </button>
-</div>
-
-
-
-        {/* Right - Your Cart, Theme Toggle, Login/Register */}
-        <div className="hidden sm:flex items-center space-x-6">
-          
-          {/* Your Cart */}
-          <Link to="/cart" className="flex items-center space-x-2 text-[#464646] dark:text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2m0 0l1.6 8h9.6l1.6-8m-12 0h12m-4 10a2 2 0 100 4 2 2 0 000-4zm-6 0a2 2 0 100 4 2 2 0 000-4z"
-              />
-            </svg>
-            <span>Your Cart</span>
-          </Link>
-
-          {/* Theme Toggle */}
-          <button onClick={() => setDarkMode(!darkMode)} className="text-xl focus:outline-none">
-            {darkMode ? "☀️" : "🌙"}
-          </button>
-
-          {/* Login/Register OR Logout */}
-          {token ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-[#00b4d8] text-white px-4 py-2 rounded-lg hover:bg-[#0096c7]"
-            >
-              Login | Register
-            </Link>
-          )}
+    <nav className="fixed top-0 w-full z-50 bg-white dark:bg-gray-900 shadow-md p-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+          Anything
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="sm:hidden text-[#00b4d8] dark:text-white text-2xl"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          ☰
-        </button>
+        {/* Search Bar */}
+        <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg px-2 py-1 w-full max-w-md mx-4">
+          <FiSearch className="text-gray-500 dark:text-gray-300 mr-2" />
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="bg-transparent outline-none w-full text-black dark:text-white"
+          />
+        </div>
+
+        {/* Right Side */}
+        <div className="flex items-center space-x-4">
+          {/* Cart */}
+          <button 
+           onClick={() => navigate('/cart')}
+           className="relative text-gray-700 md:mr-4 dark:text-white text-xl">
+            <FiShoppingCart />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">5</span>
+          </button>
+
+          {/* Auth or User Info */}
+          {isLoggedIn ? (
+            <div className="flex items-center space-x-2 text-gray-700 dark:text-white">
+              <FiUser className="text-xl" />
+              <span className="text-sm">{username}</span>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={() => navigate('/login')}   // Navigate to /login
+                className="text-sm text-white bg-blue-600 px-3 py-1 rounded-lg hover:bg-blue-700"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigate('/signup')}  // Navigate to /signup
+                className="text-sm text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 px-3 py-1 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800"
+              >
+                Signup
+              </button>
+            </>
+          )}
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="text-xl text-gray-700 dark:text-white"
+          >
+            {darkMode ? <FiSun /> : <FiMoon />}
+          </button>
+        </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="sm:hidden flex flex-col items-center space-y-3 py-3 border-t dark:border-gray-700">
-          {/* Search Bar */}
-          <div className="flex items-center bg-[#ADE8f4] dark:bg-gray-700 rounded-lg px-3 h-10">
-            <input
-              type="text"
-              className="bg-transparent outline-none w-40 px-2 text-black dark:text-white"
-              placeholder="Search..."
-            />
-            <button className="text-[#00b4d8] dark:text-[#48CAE4]">
-              🔍
-            </button>
-          </div>
-
-          {/* Your Cart */}
-          <Link to="/cart" className="flex items-center space-x-2 text-[#464646] dark:text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2m0 0l1.6 8h9.6l1.6-8m-12 0h12m-4 10a2 2 0 100 4 2 2 0 000-4zm-6 0a2 2 0 100 4 2 2 0 000-4z"
-              />
-            </svg>
-            <span>Your Cart</span>
-          </Link>
-
-          {/* Theme Toggle */}
-          <button onClick={() => setDarkMode(!darkMode)} className="text-xl focus:outline-none">
-            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
-
-          {/* Login/Register OR Logout */}
-          {token ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-[#00b4d8] text-white px-4 py-2 rounded-lg hover:bg-[#0096c7]"
-            >
-              Login | Register
-            </Link>
-          )}
-        </div>
-      )}
     </nav>
   );
 };
