@@ -14,6 +14,9 @@ import Sectio from "./components/Sectio";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Header from "./components/Header";
+import Cart from "./components/Cart";
+import Shipping from "./components/Shipping";
+import Payment from "./components/Payment";
 
 const App = () => {
   useEffect(() => {
@@ -76,13 +79,16 @@ const App = () => {
               </>
             }
           />
-
+          {/*cart page*/}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/payment" element={<Payment />} />
+            
           {/* Login Page */}
           <Route
             path="/login"
             element={
               <>
-                <Header toggleDarkMode={toggleDarkMode} />
                 <div className="flex justify-center items-center h-full">
                   <Login />
                 </div>
@@ -95,7 +101,6 @@ const App = () => {
             path="/signup"
             element={
               <>
-                <Header toggleDarkMode={toggleDarkMode} />
                 <div className="flex justify-center items-center h-full">
                   <Signup />
                 </div>
